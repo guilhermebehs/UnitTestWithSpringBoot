@@ -1,4 +1,4 @@
-package br.com.guilhermebehs.unittest.domain.entity;
+package br.com.guilhermebehs.unittest.domain.dto;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -8,18 +8,19 @@ import java.time.LocalDate;
 
 @Data
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class Customer {
+public class CustomerDto {
 
-    private String id;
+    private String legalDocumentNumber;
     private String name;
     private String address;
-    private LocalDate birthDay;
+    private LocalDate birthDate;
 
-    public Customer(String id, String name, String address, LocalDate birthDay){
-        this.id = id;
+    public CustomerDto(String legalDocumentNumber, String name, String address, LocalDate birthDate){
+        this.legalDocumentNumber = legalDocumentNumber;
         this.name = name;
         this.address = address;
-        this.birthDay = birthDay;
+        this.birthDate = birthDate;
     }
+
 
 }
