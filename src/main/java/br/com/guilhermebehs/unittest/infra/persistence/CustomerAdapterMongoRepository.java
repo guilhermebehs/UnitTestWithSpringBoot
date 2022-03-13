@@ -29,6 +29,6 @@ public class CustomerAdapterMongoRepository implements CustomerRepository {
 
     @Override
     public Optional<CustomerEntity> getByLegalDocumentNumber(String legalDocumentNumber) {
-        return Optional.empty();
+        return customerMongoRepository.findByLegalDocumentNUmber(legalDocumentNumber);
     }
 }

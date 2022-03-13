@@ -1,6 +1,7 @@
 package br.com.guilhermebehs.unittest.domain.entity;
 
 import lombok.Data;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 public class CustomerEntity {
 
     @Field("legal_document_number")
+    @Indexed(unique = true)
     private String legalDocumentNumber;
 
     @Field("name")

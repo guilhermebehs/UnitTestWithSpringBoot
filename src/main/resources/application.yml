@@ -2,3 +2,4 @@ spring:
   data:
     mongodb:
       uri: mongodb://root:mongo@localhost:27017/study?authSource=admin
+      auto-index-creation: true

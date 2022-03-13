@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(path = "v1/customers")
 public class CustomerRestController {
@@ -20,7 +22,7 @@ public class CustomerRestController {
     }
 
     @PostMapping
-    public ResponseEntity<CustomerDto> create(@RequestBody CustomerDto customerDto){
+    public ResponseEntity<CustomerDto> create(@RequestBody @Valid CustomerDto customerDto){
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(customerPortIn.create(customerDto));
