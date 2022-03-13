@@ -54,8 +54,8 @@ public class CustomerCoreTest {
     @Test
     @DisplayName("Should create customer on success")
     public void shouldCreateCustomer(){
-        CustomerDto customerDto = CustomerDtoMock.entity();
-        CustomerEntity customer = customerCore.create(customerDto);
+        var customerEntity = CustomerEntityMock.entity();
+        CustomerEntity customer = customerCore.create(customerEntity);
         assertThat(customer.getLegalDocumentNumber()).isEqualTo(customer.getLegalDocumentNumber());
         assertThat(customer.getAddress()).isEqualTo(customer.getAddress());
         assertThat(customer.getName()).isEqualTo(customer.getName());
@@ -67,10 +67,10 @@ public class CustomerCoreTest {
     @Test
     @DisplayName("Should throw when name is null")
     public void shouldThrowWhenNameIsNull(){
-        CustomerDto customerDto = CustomerDtoMock.entity();
-        customerDto.setName(null);
+        var customerEntity = CustomerEntityMock.entity();
+        customerEntity.setName(null);
         var exception = assertThrows(BadRequestException.class, ()->{
-            customerCore.create(customerDto);
+            customerCore.create(customerEntity);
         });
         assertThat(exception.getMessage()).isEqualTo("Name is required");
         verify(customerRepository,times(0)).getByLegalDocumentNumber(any());
@@ -80,10 +80,10 @@ public class CustomerCoreTest {
     @Test
     @DisplayName("Should throw when name exceeds minimum size")
     public void shouldThrowWhenNameExceedsMinSize(){
-        CustomerDto customerDto = CustomerDtoMock.entity();
-        customerDto.setName("");
+        var customerEntity = CustomerEntityMock.entity();
+        customerEntity.setName("");
         var exception = assertThrows(BadRequestException.class, ()->{
-            customerCore.create(customerDto);
+            customerCore.create(customerEntity);
         });
         assertThat(exception.getMessage()).isEqualTo("Name size must be between 1 and 100");
         verify(customerRepository,times(0)).getByLegalDocumentNumber(any());
@@ -93,13 +93,13 @@ public class CustomerCoreTest {
     @Test
     @DisplayName("Should throw when name exceeds maximum size")
     public void shouldThrowWhenNameExceedsMaxSize(){
-        CustomerDto customerDto = CustomerDtoMock.entity();
+        var customerEntity = CustomerEntityMock.entity();
         String name = "";
         for(int i =0; i < 101; i++)
             name += "a";
-        customerDto.setName(name);
+        customerEntity.setName(name);
         var exception = assertThrows(BadRequestException.class, ()->{
-            customerCore.create(customerDto);
+            customerCore.create(customerEntity);
         });
         assertThat(exception.getMessage()).isEqualTo("Name size must be between 1 and 100");
         verify(customerRepository,times(0)).getByLegalDocumentNumber(any());
@@ -109,10 +109,10 @@ public class CustomerCoreTest {
     @Test
     @DisplayName("Should throw when address is null")
     public void shouldThrowWhenAddressIsNull(){
-        CustomerDto customerDto = CustomerDtoMock.entity();
-        customerDto.setAddress(null);
+        var customerEntity = CustomerEntityMock.entity();
+        customerEntity.setAddress(null);
         var exception = assertThrows(BadRequestException.class, ()->{
-            customerCore.create(customerDto);
+            customerCore.create(customerEntity);
         });
         assertThat(exception.getMessage()).isEqualTo("Address is required");
         verify(customerRepository,times(0)).getByLegalDocumentNumber(any());
@@ -122,10 +122,10 @@ public class CustomerCoreTest {
     @Test
     @DisplayName("Should throw when address exceeds minimum size")
     public void shouldThrowWhenAddressExceedsMinSize(){
-        CustomerDto customerDto = CustomerDtoMock.entity();
-        customerDto.setAddress("");
+        var customerEntity = CustomerEntityMock.entity();
+        customerEntity.setAddress("");
         var exception = assertThrows(BadRequestException.class, ()->{
-            customerCore.create(customerDto);
+            customerCore.create(customerEntity);
         });
         assertThat(exception.getMessage()).isEqualTo("Address size must be between 1 and 100");
         verify(customerRepository,times(0)).getByLegalDocumentNumber(any());
@@ -135,13 +135,13 @@ public class CustomerCoreTest {
     @Test
     @DisplayName("Should throw when address exceeds maximum size")
     public void shouldThrowWhenAddressExceedsMaxSize(){
-        CustomerDto customerDto = CustomerDtoMock.entity();
+        var customerEntity = CustomerEntityMock.entity();
         String address = "";
         for(int i =0; i < 101; i++)
             address += "a";
-        customerDto.setAddress(address);
+        customerEntity.setAddress(address);
         var exception = assertThrows(BadRequestException.class, ()->{
-            customerCore.create(customerDto);
+            customerCore.create(customerEntity);
         });
         assertThat(exception.getMessage()).isEqualTo("Address size must be between 1 and 100");
         verify(customerRepository,times(0)).getByLegalDocumentNumber(any());
@@ -151,10 +151,10 @@ public class CustomerCoreTest {
     @Test
     @DisplayName("Should throw when birth date is null")
     public void shouldThrowWhenBirthDateIsNull(){
-        CustomerDto customerDto = CustomerDtoMock.entity();
-        customerDto.setBirthDate(null);
+        var customerEntity = CustomerEntityMock.entity();
+        customerEntity.setBirthDate(null);
         var exception = assertThrows(BadRequestException.class, ()->{
-            customerCore.create(customerDto);
+            customerCore.create(customerEntity);
         });
         assertThat(exception.getMessage()).isEqualTo("Birth date is required");
         verify(customerRepository,times(0)).getByLegalDocumentNumber(any());
@@ -164,10 +164,10 @@ public class CustomerCoreTest {
     @Test
     @DisplayName("Should throw when legal document number is null")
     public void shouldThrowWhenLegalDocumentNumberIsNull(){
-        CustomerDto customerDto = CustomerDtoMock.entity();
-        customerDto.setLegalDocumentNumber(null);
+        var customerEntity = CustomerEntityMock.entity();
+        customerEntity.setLegalDocumentNumber(null);
         var exception = assertThrows(BadRequestException.class, ()->{
-            customerCore.create(customerDto);
+            customerCore.create(customerEntity);
         });
         assertThat(exception.getMessage()).isEqualTo("Legal document number is required");
         verify(customerRepository,times(0)).getByLegalDocumentNumber(any());
@@ -177,10 +177,10 @@ public class CustomerCoreTest {
     @Test
     @DisplayName("Should throw when legal document number is not a number")
     public void shouldThrowWhenLegalDocumentNumberIsNaN(){
-        CustomerDto customerDto = CustomerDtoMock.entity();
-        customerDto.setLegalDocumentNumber("1234a");
+        var customerEntity = CustomerEntityMock.entity();
+        customerEntity.setLegalDocumentNumber("1234a");
         var exception = assertThrows(BadRequestException.class, ()->{
-            customerCore.create(customerDto);
+            customerCore.create(customerEntity);
         });
         assertThat(exception.getMessage()).isEqualTo("Legal document number is invalid");
         verify(customerRepository,times(0)).getByLegalDocumentNumber(any());
@@ -191,10 +191,10 @@ public class CustomerCoreTest {
     @Test
     @DisplayName("Should throw when customer already exists on creation")
     public void shouldThrowWhenCustomerAlreadyExistsOnCreation(){
-        CustomerDto customerDto = CustomerDtoMock.entity();
+        var customerEntity = CustomerEntityMock.entity();
         when(customerRepository.getByLegalDocumentNumber(any())).thenReturn(Optional.of(customerMock));
         var exception = assertThrows(BadRequestException.class, ()->{
-            customerCore.create(customerDto);
+            customerCore.create(customerEntity);
         });
         assertThat(exception.getMessage()).isEqualTo("Legal document number is invalid");
         verify(customerRepository,times(1)).getByLegalDocumentNumber(any());

@@ -1,6 +1,5 @@
 package br.com.guilhermebehs.unittest.domain;
 
-import br.com.guilhermebehs.unittest.domain.dto.CustomerDto;
 import br.com.guilhermebehs.unittest.domain.entity.CustomerEntity;
 import br.com.guilhermebehs.unittest.domain.error.BadRequestException;
 import br.com.guilhermebehs.unittest.domain.port.CustomerRepository;
@@ -22,12 +21,11 @@ public class CustomerCore {
         return customerRepository.list();
     }
 
-    public CustomerEntity create(CustomerDto customer){
+    public CustomerEntity create(CustomerEntity customer){
         validateName(customer.getName());
         validateAddress(customer.getAddress());
         validateBirthDay(customer.getBirthDate());
         validateLegalDocumentNumber(customer.getLegalDocumentNumber());
-
         return customerRepository.create(customer);
     }
 

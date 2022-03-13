@@ -1,17 +1,25 @@
 package br.com.guilhermebehs.unittest.domain.entity;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDate;
 
 @Data
+@Document("customer")
 public class CustomerEntity {
 
+    @Field("legal_document_number")
     private String legalDocumentNumber;
+
+    @Field("name")
     private String name;
+
+    @Field("address")
     private String address;
+
+    @Field("birth_date")
     private LocalDate birthDate;
 
     public CustomerEntity(String legalDocumentNumber, String name, String address, LocalDate birthDate){
